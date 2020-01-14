@@ -43,9 +43,17 @@ validateLastName() {
 }
 saveProfile(formValues) {
   if (this.profileForm.valid) {
-  this.authservice.updateProfile(formValues.firstName, formValues.lastName);
-  this.toastr.success('Profile Saved');
+    this.authservice.updateProfile(formValues.firstName, formValues.lastName).subscribe(() => {
+      this.toastr.success('Profile Saved');
+  });
+
 }
-}
+  }
+
+  logout() {
+    this.authservice.logout().subscribe(() => {
+      this.router.navigate(['/user/login']);
+    });
+  }
 
 }
